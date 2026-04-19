@@ -131,7 +131,7 @@ const Dashboard = () => {
 
                     <div key={todo.id || todo._id}>
                         <p>{todo.task}</p>
-                        <button onClick={() => handleDelete(todo.id || todo._id)}>Delete</button>
+                        <button onClick={() => handleDelete(todo.id || todo._id)}>Delete it!</button>
                         <button onClick={() => { setEditingId(todo.id || todo._id); setEditingString(todo.task); }}>Edit</button>
                     </div>
 
