@@ -7,7 +7,7 @@ from database import todos_collection
 from utils.auth_dependency import get_current_user
 
 
-router = APIRouter(prefix="/todos", tags=["Todos"])
+router = APIRouter(prefix="/api/v1/todos", tags=["Todos V1"])
 
 @router.get("/")
 def get_todos(page: int = Query(1 , ge=1),limit: int = Query(10 , le=100),user_id: str = Depends(get_current_user)):
