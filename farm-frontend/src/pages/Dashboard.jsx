@@ -139,7 +139,7 @@ const Dashboard = () => {
                         ) : (
                             <>
                                 <p style={{ margin: 0, fontWeight: '500', color: 'white' }}>
-                                    {todo.task || todo.title || todo.description || "Untitled Task"}
+                                    {todo.task || todo.title || todo.todo || "No text found in DB"}
                                 </p>
                                 <div style={{ display: 'flex', gap: '8px' }}>
                                     <button
