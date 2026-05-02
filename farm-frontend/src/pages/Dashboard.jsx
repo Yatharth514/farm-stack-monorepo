@@ -138,15 +138,8 @@ const Dashboard = () => {
                             </div>
                         ) : (
                             <>
-                                <p style={{
-                                    margin: 0,
-                                    fontWeight: 'bold',
-                                    color: '#ffffff', // Explicit hex for pure white
-                                    fontSize: '18px',
-                                    minHeight: '20px',
-                                    display: 'block'
-                                }}>
-                                    {todo.task || "No Task Text Found"}
+                                <p style={{ margin: 0, fontWeight: '500', color: 'white' }}>
+                                    {todo.task || todo.title || todo.description || "Untitled Task"}
                                 </p>
                                 <div style={{ display: 'flex', gap: '8px' }}>
                                     <button
