@@ -100,7 +100,7 @@ const Dashboard = () => {
         <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
             <h1>My Dashboard</h1>
 
-            {/* --- YOUR CREATE FORM --- */}
+            {/* --- CREATE FORM --- */}
             <form onSubmit={handleCreate} style={{ display: 'flex', marginBottom: '20px' }}>
                 <input
                     type="text"
@@ -113,32 +113,53 @@ const Dashboard = () => {
             </form>
 
             {/* --- THE LIST OF TASKS --- */}
-            {todos.map((todo) => (
-                editingId === todo.id || editingId === todo._id ? (
-
-                    <div key={todo.id || todo._id}>
-                        <input
-                            type="text"
-                            value={editingString}
-                            onChange={(e) => setEditingString(e.target.value)}
-                        />
-                        <button onClick={() => handleEdit(todo.id || todo._id)}>Save</button>
-                        <button onClick={() => setEditingId(null)}>Cancel</button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                {todos.map((todo) => (
+                    <div 
+                        key={todo.id || todo._id} 
+                        style={{ 
+                            backgroundColor: '#1e1e1e', 
+                            padding: '15px', 
+                            borderRadius: '8px', 
+                            border: '1px solid #333',
+                            display: 'flex',
+                            justifyContent: 'space-between', // Fixed camelCase here
+                            alignItems: 'center'
+                        }}
+                    >
+                        {editingId === (todo.id || todo._id) ? (
+                            <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+                                <input
+                                    type="text"
+                                    value={editingString}
+                                    onChange={(e) => setEditingString(e.target.value)}
+                                    style={{ flexGrow: 1, padding: '5px' }}
+                                />
+                                <button onClick={() => handleEdit(todo.id || todo._id)}>Save</button>
+                                <button onClick={() => setEditingId(null)}>Cancel</button>
+                            </div>
+                        ) : (
+                            <>
+                                <p style={{ margin: 0, fontWeight: '500' }}>{todo.task}</p>
+                                <div style={{ display: 'flex', gap: '8px' }}>
+                                    <button 
+                                        onClick={() => { setEditingId(todo.id || todo._id); setEditingString(todo.task); }}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button 
+                                        onClick={() => handleDelete(todo.id || todo._id)}
+                                        style={{ cursor: 'pointer', color: '#ff4d4d' }}
+                                    >
+                                        Delete it!
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
-
-                ) : (
-
-
-                    <div key={todo.id || todo._id}>
-                        <p>{todo.task}</p>
-                        <button onClick={() => handleDelete(todo.id || todo._id)}>Delete it!</button>
-                        <button onClick={() => { setEditingId(todo.id || todo._id); setEditingString(todo.task); }}>Edit</button>
-                    </div>
-
-                )
-            ))}
-
-
+                ))}
+            </div>
         </div>
     );
 };
