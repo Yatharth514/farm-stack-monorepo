@@ -66,32 +66,30 @@ const Dashboard = () => {
         }
     };
 
-    const handleEdit=async(id)=>{
-    try{
-        const response=await apiClient.patch(`/todos/${id}`,{
-            task: editingString
-        })
-        
-        setTodos(
-            todos.map((todo)=>{
+    const handleEdit = async (id) => {
+        try {
+            const response = await apiClient.patch(`/todos/${id}`, {
+                task: editingString
+            })
 
-                if(todo.id===id||todo._id===id)
-                {
-                    return {...todo,task: editingString};
+            setTodos(
+                todos.map((todo) => {
+
+                    if (todo.id === id || todo._id === id) {
+                        return { ...todo, task: editingString };
+                    }
+                    else {
+                        return todo
+                    }
                 }
-                else
-                {
-                    return todo
-                }
-            }
-        )
-        )
-        setEditingId(null);
-    }catch(error){
-        console.error("Error",error);
-    }
-    
-};
+                )
+            )
+            setEditingId(null);
+        } catch (error) {
+            console.error("Error", error);
+        }
+
+    };
 
 
     if (isLoading) return <h2>Loading your tasks...</h2>;
@@ -115,12 +113,12 @@ const Dashboard = () => {
             {/* --- THE LIST OF TASKS --- */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 {todos.map((todo) => (
-                    <div 
-                        key={todo.id || todo._id} 
-                        style={{ 
-                            backgroundColor: '#1e1e1e', 
-                            padding: '15px', 
-                            borderRadius: '8px', 
+                    <div
+                        key={todo.id || todo._id}
+                        style={{
+                            backgroundColor: '#1e1e1e',
+                            padding: '15px',
+                            borderRadius: '8px',
                             border: '1px solid #333',
                             display: 'flex',
                             justifyContent: 'space-between', // Fixed camelCase here
@@ -140,15 +138,24 @@ const Dashboard = () => {
                             </div>
                         ) : (
                             <>
-                                <p style={{ margin: 0, fontWeight: '500', color: 'white' }}>{todo.task}</p>
+                                <p style={{
+                                    margin: 0,
+                                    fontWeight: 'bold',
+                                    color: '#ffffff', // Explicit hex for pure white
+                                    fontSize: '18px',
+                                    minHeight: '20px',
+                                    display: 'block'
+                                }}>
+                                    {todo.task || "No Task Text Found"}
+                                </p>
                                 <div style={{ display: 'flex', gap: '8px' }}>
-                                    <button 
+                                    <button
                                         onClick={() => { setEditingId(todo.id || todo._id); setEditingString(todo.task); }}
                                         style={{ cursor: 'pointer' }}
                                     >
                                         Edit
                                     </button>
-                                    <button 
+                                    <button
                                         onClick={() => handleDelete(todo.id || todo._id)}
                                         style={{ cursor: 'pointer', color: '#ff4d4d' }}
                                     >
