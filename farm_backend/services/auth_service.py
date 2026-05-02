@@ -22,9 +22,17 @@ def register_user_service(user: UserRegister):
         "password": hashed_password
     }
 
-    users_collection.insert_one(new_user)
+    
+    result = users_collection.insert_one(new_user)
+    token = create_access_token({"user_id": str(result.inserted_id)})
+    
+    return {
+        "message": "User registered successfully",
+        "access_token": token,
+        "token_type": "bearer"
+    }
 
-    return {"message": "User registered successfully"}
+    
 
 def verify_user_service(user: UserLogin):
     existing_user = users_collection.find_one({"email": user.email})
