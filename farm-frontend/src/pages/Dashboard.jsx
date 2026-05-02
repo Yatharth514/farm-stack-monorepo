@@ -140,7 +140,7 @@ const Dashboard = () => {
                             </div>
                         ) : (
                             <>
-                                <p style={{ margin: 0, fontWeight: '500' }}>{todo.task}</p>
+                                <p style={{ margin: 0, fontWeight: '500', color: 'white' }}>{todo.task}</p>
                                 <div style={{ display: 'flex', gap: '8px' }}>
                                     <button 
                                         onClick={() => { setEditingId(todo.id || todo._id); setEditingString(todo.task); }}
