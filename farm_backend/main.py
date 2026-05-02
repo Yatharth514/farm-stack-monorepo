@@ -10,7 +10,8 @@ import time
 limiter=Limiter(key_func=get_remote_address)
 app = FastAPI()
 app.state.limiter=limiter
-app.add_exception_handler(RateLimitExceeded,_rate_limit_exceeded_handler)\
+app.add_exception_handler(RateLimitExceeded,_rate_limit_exceeded_handler)
+
 @app.get("/api/secure-data")
 @limiter.limit("3/minute") 
 async def secure_endpoint(request: Request):
